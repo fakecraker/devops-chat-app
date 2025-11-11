@@ -14,7 +14,7 @@ import {io} from 'socket.io-client';
 const BASE_URL =
   window.location.hostname === "localhost"
     ? "http://localhost:5001"
-    : "http://3.111.198.194:5001";
+    : "http://13.126.15.116:5001";
 
 
 export const useAuthStore=create((set,get)=>({

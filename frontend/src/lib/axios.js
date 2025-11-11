@@ -19,7 +19,7 @@ import axios from "axios";
 const baseURL =
   window.location.hostname === "localhost"
     ? "http://localhost:5001/api"                // when running locally
-    : "http://3.111.198.194:5001/api";
+    : "http://13.126.15.116:5001/api";
 
 
 export const axiosInstance = axios.create({
