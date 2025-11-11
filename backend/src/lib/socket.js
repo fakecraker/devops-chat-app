@@ -6,11 +6,20 @@ import express from 'express';
 const app=express();
 const server=http.createServer(app);
 
-const io=new Server(server,{
-    cors:{
-        origin:["http://3.111.198.194:5173", "http://localhost:5173"]
-    }
+// const io=new Server(server,{
+//     cors:{
+//         origin:["http://3.111.198.194:5173", "http://localhost:5173"]
+//     }
+// });
+
+const io = new Server(server, {
+  cors: {
+    origin: ["http://3.111.198.194:5173", "http://localhost:5173"],
+    methods: ["GET", "POST"],
+    credentials: true
+  }
 });
+
 
 export function getReceiverSocketId(userId){
     return userSocketMap[userId];
