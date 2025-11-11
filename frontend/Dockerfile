@@ -36,21 +36,43 @@
 
 
 # Stage 1: Build React (Vite) app
-FROM node:22-alpine AS builder
+# FROM node:22-alpine AS builder
 
+# WORKDIR /app
+# COPY package.json package-lock.json ./
+# RUN npm ci
+# COPY . .
+# RUN npm run build
+
+# # Stage 2: Serve with Nginx
+# FROM nginx:alpine
+
+# # Copy built static files
+# COPY --from=builder /app/dist /usr/share/nginx/html
+
+# # Expose Nginx port
+# EXPOSE 80
+
+# CMD ["nginx", "-g", "daemon off;"]
+
+# Use Node.js base image
+FROM node:22-alpine
+
+# Set working directory
 WORKDIR /app
-COPY package.json package-lock.json ./
-RUN npm ci
+
+# Copy package files first (for better caching)
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy rest of the app
 COPY . .
-RUN npm run build
 
-# Stage 2: Serve with Nginx
-FROM nginx:alpine
+# Expose the frontend port (default Vite = 5173, CRA = 3000)
+EXPOSE 5173
 
-# Copy built static files
-COPY --from=builder /app/dist /usr/share/nginx/html
+# Run the frontend development server
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
 
-# Expose Nginx port
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
