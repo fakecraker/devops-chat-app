@@ -25,7 +25,7 @@ app.use(cookieParser());
 // }));
 
 app.use(cors({
-  origin: ["http://13.126.15.116:5173", "http://localhost:5173"],
+  origin: ["http://13.235.254.52:5173", "http://localhost:5173"],
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
